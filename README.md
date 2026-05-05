@@ -122,10 +122,10 @@ written for our own delivery loop.
 The skills draw on a small canon. If you want the long-form versions of the
 ideas they encode, these four books are the source material:
 
-- **The Pragmatic Programmer** — David Thomas & Andrew Hunt. The classic on alignment ("no-one knows exactly what they want") and feedback loops ("the rate of feedback is your speed limit"). Underpins `/grill-me` and `/diagnose`.
-- **Domain-Driven Design** — Eric Evans. The case for a ubiquitous language shared between developers and domain experts. Underpins `/grill-with-docs` and the `CONTEXT.md` discipline.
-- **Extreme Programming Explained** — Kent Beck. "Invest in the design of the system every day." Underpins `/tdd` and the design-first stance of `/improve-codebase-architecture`.
-- **A Philosophy of Software Design** — John Ousterhout. Source of the deep-modules framing — "the best modules are deep" — that drives `/improve-codebase-architecture` and informs `/to-prd`.
+- **[The Pragmatic Programmer](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/)** — David Thomas & Andrew Hunt. The classic on alignment ("no-one knows exactly what they want") and feedback loops ("the rate of feedback is your speed limit"). Underpins `/grill-me` and `/diagnose`.
+- **[Domain-Driven Design](https://www.domainlanguage.com/ddd/)** — Eric Evans. The case for a ubiquitous language shared between developers and domain experts. Underpins `/grill-with-docs` and the `CONTEXT.md` discipline.
+- **[Extreme Programming Explained](https://www.informit.com/store/extreme-programming-explained-embrace-change-9780321278654)** — Kent Beck. "Invest in the design of the system every day." Underpins `/tdd` and the design-first stance of `/improve-codebase-architecture`.
+- **[A Philosophy of Software Design](https://web.stanford.edu/~ouster/cgi-bin/book.php)** — John Ousterhout. Source of the deep-modules framing — "the best modules are deep" — that drives `/improve-codebase-architecture` and informs `/to-prd`.
 
 ## Manual install
 
