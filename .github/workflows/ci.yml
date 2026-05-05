@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  markdown:
+    name: Markdown
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v20
+        with:
+          globs: |
+            **/*.md
+
+  skill-validation:
+    name: Skill Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate SKILL frontmatter
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          skill_files = sorted(Path("skills").rglob("SKILL.md"))
+          if not skill_files:
+              print("No skills/*/SKILL.md files found")
+              sys.exit(1)
+
+          required = ["name", "description", "argument-hint"]
+          errors = []
+
+          for skill_path in skill_files:
+              text = skill_path.read_text(encoding="utf-8")
+              match = re.match(r"^---\n(.*?)\n---\n", text, flags=re.DOTALL)
+              if not match:
+                  errors.append(f"{skill_path}: must start with YAML frontmatter delimited by ---")
+                  continue
+
+              frontmatter = match.group(1)
+              keys = {}
+              for line in frontmatter.splitlines():
+                  if ":" not in line:
+                      continue
+                  k, v = line.split(":", 1)
+                  keys[k.strip()] = v.strip().strip('"').strip("'")
+
+              missing = [k for k in required if not keys.get(k)]
+              if missing:
+                  errors.append(f"{skill_path}: missing frontmatter keys: {', '.join(missing)}")
+                  continue
+
+              expected_dir = keys["name"]
+              actual_dir = skill_path.parent.name
+              if expected_dir != actual_dir:
+                  errors.append(
+                      f"{skill_path}: frontmatter name '{expected_dir}' "
+                      f"does not match directory '{actual_dir}'"
+                  )
+
+              print(f"OK  {skill_path}")
+
+          if errors:
+              print("\nValidation failed:")
+              for e in errors:
+                  print(f"  - {e}")
+              sys.exit(1)
+
+          print(f"\nAll {len(skill_files)} skill(s) validated.")
+          PY
