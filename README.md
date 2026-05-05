@@ -42,7 +42,7 @@ Or, from a clone of this repo, symlink every skill into `~/.claude/skills/`:
 
 ## Repository layout
 
-```
+```text
 skills/
   workon/SKILL.md   # /workon
   review/SKILL.md   # /review
