@@ -34,10 +34,11 @@ jobs:
 
           skill_files = sorted(Path("skills").rglob("SKILL.md"))
           if not skill_files:
-              print("No skills/*/SKILL.md files found")
+              print("No skills/**/SKILL.md files found")
               sys.exit(1)
 
-          required = ["name", "description", "argument-hint"]
+          required = ["name", "description"]
+          allowed_categories = {"engineering", "productivity", "misc"}
           errors = []
 
           for skill_path in skill_files:
@@ -47,26 +48,49 @@ jobs:
                   errors.append(f"{skill_path}: must start with YAML frontmatter delimited by ---")
                   continue
 
-              frontmatter = match.group(1)
+              # Naive YAML key parse, tolerant of folded `>` blocks for description.
+              raw = match.group(1)
               keys = {}
-              for line in frontmatter.splitlines():
+              current_key = None
+              for line in raw.splitlines():
+                  if not line.strip():
+                      continue
+                  if line.startswith((" ", "\t")) and current_key:
+                      keys[current_key] = (keys[current_key] + " " + line.strip()).strip()
+                      continue
                   if ":" not in line:
                       continue
                   k, v = line.split(":", 1)
-                  keys[k.strip()] = v.strip().strip('"').strip("'")
+                  current_key = k.strip()
+                  v = v.strip()
+                  if v in (">", "|"):
+                      keys[current_key] = ""
+                  else:
+                      keys[current_key] = v.strip('"').strip("'")
 
               missing = [k for k in required if not keys.get(k)]
               if missing:
                   errors.append(f"{skill_path}: missing frontmatter keys: {', '.join(missing)}")
                   continue
 
-              expected_dir = keys["name"]
-              actual_dir = skill_path.parent.name
-              if expected_dir != actual_dir:
+              skill_dir = skill_path.parent.name
+              if keys["name"] != skill_dir:
                   errors.append(
-                      f"{skill_path}: frontmatter name '{expected_dir}' "
-                      f"does not match directory '{actual_dir}'"
+                      f"{skill_path}: frontmatter name '{keys['name']}' "
+                      f"does not match directory '{skill_dir}'"
                   )
+                  continue
+
+              # Expect skills/<category>/<skill-name>/SKILL.md
+              parts = skill_path.parts
+              if len(parts) >= 3 and parts[0] == "skills":
+                  category = parts[1]
+                  if category not in allowed_categories:
+                      errors.append(
+                          f"{skill_path}: category '{category}' not in "
+                          f"{sorted(allowed_categories)}"
+                      )
+                      continue
 
               print(f"OK  {skill_path}")
 

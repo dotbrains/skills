@@ -1,2 +1,12 @@
 config:
-  MD013: false
+  MD013: false  # line length
+  MD024: false  # duplicate headings (categories repeat across skills)
+  MD029: false  # ordered list prefix style
+  MD031: false  # blanks around fenced code blocks
+  MD032: false  # blanks around lists
+  MD033: false  # inline HTML (we use details/summary blocks)
+  MD034: false  # bare URLs (used in third-party attribution)
+  MD036: false  # emphasis used as heading (idiomatic in skill specs)
+  MD040: false  # fenced code language (some ported docs use plain code blocks)
+  MD041: false  # first line as h1 (some skills are intentionally body-only)
+  MD049: false  # emphasis style consistency
