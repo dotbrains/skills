@@ -15,8 +15,11 @@ Pick the skills you want, choose the agents to install them on, and you're done.
 
 ## Available skills
 
-- **[workon](./skills/workon/SKILL.md)** — Pick up a Linear ticket end-to-end: worktree, implement, PR, then watch the PR on a 5-minute loop addressing review comments, CI failures, and merge conflicts until merged.
-- **[review](./skills/review/SKILL.md)** — Read-only, high-signal pull request review using PR description, ticket scope, full diff context, and PR-suggested tests. Returns Critical / Suggestions / Nits.
+- **[workon](./skills/workon/README.md)** — Pick up a Linear ticket end-to-end: worktree, implement, PR, then watch the PR on a 5-minute loop addressing review comments, CI failures, and merge conflicts until merged.
+- **[review](./skills/review/README.md)** — Read-only, high-signal pull request review using PR description, ticket scope, full diff context, and PR-suggested tests. Returns Critical / Suggestions / Nits.
+
+Each skill directory contains its own `README.md` (with diagrams and usage) and
+the canonical `SKILL.md` consumed by the agent.
 
 ## Manual install
 
@@ -44,8 +47,12 @@ Or, from a clone of this repo, symlink every skill into `~/.claude/skills/`:
 
 ```text
 skills/
-  workon/SKILL.md   # /workon
-  review/SKILL.md   # /review
+  workon/
+    README.md       # diagrams, usage, requirements
+    SKILL.md        # /workon canonical definition
+  review/
+    README.md
+    SKILL.md        # /review canonical definition
 scripts/
   link-skills.sh    # symlink every SKILL.md into ~/.claude/skills/
   list-skills.sh    # print discovered SKILL.md paths
