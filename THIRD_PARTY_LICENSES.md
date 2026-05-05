@@ -15,6 +15,7 @@ under [PolyForm Shield 1.0.0](./LICENSE).
 The following skills were ported from `mattpocock/skills` and remain MIT-licensed:
 
 - `skills/engineering/diagnose/` (including `scripts/hitl-loop.template.sh`)
+- `skills/engineering/grill-with-docs/` (including `CONTEXT-FORMAT.md`, `ADR-FORMAT.md`)
 - `skills/engineering/improve-codebase-architecture/` (including `DEEPENING.md`, `INTERFACE-DESIGN.md`, `LANGUAGE.md`)
 - `skills/engineering/tdd/` (including `tests.md`, `mocking.md`, `deep-modules.md`, `interface-design.md`, `refactoring.md`)
 - `skills/engineering/to-issues/`
@@ -22,13 +23,14 @@ The following skills were ported from `mattpocock/skills` and remain MIT-license
 - `skills/engineering/triage/` (including `AGENT-BRIEF.md`, `OUT-OF-SCOPE.md`)
 - `skills/engineering/zoom-out/`
 - `skills/productivity/caveman/`
+- `skills/productivity/grill-me/`
 - `skills/productivity/write-a-skill/`
 
-Some upstream skills (e.g. `triage`, `to-issues`, `to-prd`,
-`improve-codebase-architecture`) reference a setup skill or `grill-with-docs`
-that has not been ported. The cross-references are intentionally preserved as
-written; install the upstream versions from `mattpocock/skills` if you need
-them.
+A few upstream skills (`triage`, `to-issues`, `to-prd`) reference an
+upstream `setup-matt-pocock-skills` skill that has not been ported here.
+The cross-references are intentionally preserved as written; install the
+upstream version from `mattpocock/skills` if you need it, or hand-configure
+your issue tracker and triage label vocabulary.
 
 ### Original license
 

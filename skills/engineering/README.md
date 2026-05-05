@@ -5,6 +5,7 @@ Skills for code work — bug-hunting, design, planning, review, and execution.
 ## Skills
 
 - **[diagnose](./diagnose/README.md)** — Disciplined diagnosis loop for hard bugs and performance regressions: reproduce → minimise → hypothesise → instrument → fix → regression-test.
+- **[grill-with-docs](./grill-with-docs/README.md)** — Code-aware grilling session that challenges your plan against the existing domain model and updates `CONTEXT.md` / ADRs inline.
 - **[improve-codebase-architecture](./improve-codebase-architecture/README.md)** — Surface architectural friction and propose deepening opportunities — refactors that turn shallow modules into deep ones.
 - **[review](./review/README.md)** — Read-only, high-signal pull request review using PR description, ticket scope, full diff context, and PR-suggested tests. Returns Critical / Suggestions / Nits.
 - **[tdd](./tdd/README.md)** — Test-driven development with a red-green-refactor loop. Vertical slices via tracer bullets — one test, one implementation, repeat.
@@ -18,7 +19,8 @@ Skills for code work — bug-hunting, design, planning, review, and execution.
 
 ```mermaid
 flowchart LR
-  ZO[zoom-out<br/>get oriented] --> PRD[to-prd<br/>write PRD]
+  ZO[zoom-out<br/>get oriented] --> GWD[grill-with-docs<br/>challenge the plan]
+  GWD --> PRD[to-prd<br/>write PRD]
   PRD --> TI[to-issues<br/>break into slices]
   TI --> TRI[triage<br/>label & ready issues]
   TRI --> WO[workon<br/>execute a slice]

@@ -39,8 +39,10 @@ my attention", "let's look at #42", "move #42 to ready-for-agent").
 ## Caveat
 
 Expects an issue tracker, triage label vocabulary, and an `.out-of-scope/`
-knowledge base configured upstream. The companion grilling skill
-(`grill-with-docs`) is also referenced but not ported here.
+knowledge base configured upstream. Hand-configure or install the upstream
+`setup-matt-pocock-skills` skill before invoking. The companion grilling
+skill ([`/grill-with-docs`](../grill-with-docs/README.md)) is referenced
+during the "Grill" step and is included in this repo.
 
 ## Files
 

@@ -20,6 +20,7 @@ Pick the skills you want, choose the agents to install them on, and you're done.
 Skills for code work — bug-hunting, design, planning, review, and execution.
 
 - **[diagnose](./skills/engineering/diagnose/README.md)** — Disciplined diagnosis loop for hard bugs and performance regressions: reproduce → minimise → hypothesise → instrument → fix → regression-test.
+- **[grill-with-docs](./skills/engineering/grill-with-docs/README.md)** — Code-aware grilling session that challenges your plan against the existing domain model and updates `CONTEXT.md` / ADRs inline.
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/README.md)** — Surface architectural friction and propose deepening opportunities — refactors that turn shallow modules into deep ones.
 - **[review](./skills/engineering/review/README.md)** — Read-only, high-signal pull request review using PR description, ticket scope, full diff context, and PR-suggested tests. Returns Critical / Suggestions / Nits.
 - **[tdd](./skills/engineering/tdd/README.md)** — Test-driven development with a red-green-refactor loop. Vertical slices via tracer bullets — one test, one implementation, repeat.
@@ -34,6 +35,7 @@ Skills for code work — bug-hunting, design, planning, review, and execution.
 General workflow skills, not code-specific.
 
 - **[caveman](./skills/productivity/caveman/README.md)** — Ultra-compressed communication mode. Cuts token usage ~75% by dropping filler while keeping full technical accuracy.
+- **[grill-me](./skills/productivity/grill-me/README.md)** — Get interviewed relentlessly about a plan or design until every branch of the decision tree resolves.
 - **[write-a-skill](./skills/productivity/write-a-skill/README.md)** — Create new agent skills with proper structure, progressive disclosure, and bundled resources.
 
 Each skill directory contains its own `README.md` (with usage and any
@@ -65,6 +67,9 @@ skills/
       SKILL.md
       README.md
       scripts/hitl-loop.template.sh
+    grill-with-docs/
+      SKILL.md  README.md
+      CONTEXT-FORMAT.md  ADR-FORMAT.md
     improve-codebase-architecture/
       SKILL.md
       README.md
@@ -81,6 +86,7 @@ skills/
     zoom-out/      SKILL.md  README.md
   productivity/
     caveman/       SKILL.md  README.md
+    grill-me/      SKILL.md  README.md
     write-a-skill/ SKILL.md  README.md
 scripts/
   link-skills.sh   # symlink every SKILL.md into ~/.claude/skills/

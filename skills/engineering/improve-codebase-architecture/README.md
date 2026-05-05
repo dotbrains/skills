@@ -40,9 +40,10 @@ npx skills@latest add dotbrains/skills
 ## Caveat
 
 The skill references `CONTEXT.md` (a domain glossary) and `docs/adr/` (ADRs)
-that the upstream `grill-with-docs` skill is responsible for creating. Both
-are also referenced but not ported here. The skill still runs without them —
-it just won't have project-specific vocabulary to name candidates.
+that the companion [`/grill-with-docs`](../grill-with-docs/README.md) skill
+is responsible for creating. Both files are *informative* — the skill still
+runs without them, it just won't have project-specific vocabulary to name
+candidates. Run `/grill-with-docs` first if you want maximum value here.
 
 ## Files
 
