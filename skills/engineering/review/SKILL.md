@@ -71,9 +71,29 @@ Create a short internal contract:
 Reject speculative assumptions. If scope is ambiguous, flag uncertainty in final
 output.
 
-## 3. Analyze code changes with surrounding context
+## 3. Gather repo context
 
-### 3.1 Read changed files
+Before judging the diff, build a working picture of the repo's conventions, standards, and the tooling already available. Without this, "consistent with existing patterns" (§4.2) is just opinion. This is read-only — same constraint as the rest of the skill.
+
+**Repository documentation** — read what's present, skip what isn't:
+
+- Root-level: `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `README.md`, `STYLEGUIDE.md`, `ARCHITECTURE.md`.
+- `docs/` and `documentation/` trees — focus on entries about contributing, conventions, testing, architecture.
+- AI-assistant rules: `.cursor/rules/`, `.cursorrules`, `.github/copilot-instructions.md`, `.windsurfrules` — treat as authoritative when present.
+- The nearest `CLAUDE.md` / `AGENTS.md` to each changed file (subdirectory rules can override repo-root rules).
+- Lint/format/test config (`.eslintrc*`, `prettier*`, `pyproject.toml`, `tsconfig.json`, `Makefile`, `package.json` scripts) — surfaces required quality gates and naming conventions used as the baseline for findings.
+
+**Available skills** — identify ones that fit the changed code's domain:
+
+- Re-read the available-skills list already provided in this conversation; flag any whose description matches what the PR touches (e.g. `claude-api` for Anthropic SDK changes, `tdd` for test-heavy PRs, `simplify` for cleanup PRs).
+- Also scan `~/.claude/skills/`, `~/.agents/skills/`, and `<repo>/.claude/skills/` for project-local skills.
+- Use applicable skills' criteria to sharpen findings — but stay read-only and do not invoke any skill that mutates state.
+
+If repo docs and the PR materially conflict, the conflict is itself a finding (Critical or Suggestion depending on severity).
+
+## 4. Analyze code changes with surrounding context
+
+### 4.1 Read changed files
 
 Use:
 
@@ -83,7 +103,7 @@ gh pr diff "$PR_REF"
 
 and/or file-level APIs to identify changed paths and hunks.
 
-### 3.2 Read nearby code beyond hunks
+### 4.2 Read nearby code beyond hunks
 
 For each changed region, inspect surrounding functions/modules to evaluate:
 
@@ -95,7 +115,7 @@ For each changed region, inspect surrounding functions/modules to evaluate:
 
 Do not limit analysis to exact diff lines.
 
-### 3.3 Prioritize evidence-backed findings
+### 4.3 Prioritize evidence-backed findings
 
 Only surface findings when supported by concrete evidence from code behavior,
 tests, contracts, or runtime implications.
@@ -103,7 +123,7 @@ tests, contracts, or runtime implications.
 Suppress low-value noise and stylistic churn unless it meaningfully affects
 maintainability or correctness.
 
-## 4. Run tests claimed by the PR (read-only execution)
+## 5. Run tests claimed by the PR (read-only execution)
 
 Identify tests/commands explicitly claimed in PR description (e.g. "Tests run",
 checklist, pasted commands).
@@ -119,7 +139,7 @@ Then:
 
 Record pass/fail plus key error snippets for failed commands.
 
-## 5. Produce final review output
+## 6. Produce final review output
 
 Return a well-formatted review with the exact section order below.
 

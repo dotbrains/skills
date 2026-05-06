@@ -5,9 +5,10 @@ default — never edits files, commits, pushes, or posts PR comments.
 
 1. Read PR metadata and description.
 2. Read the associated ticket to understand scope and intent.
-3. Analyze the diff plus surrounding code context.
-4. Run PR-suggested tests in read-only mode.
-5. Produce a structured review with Critical / Suggestions / Nits.
+3. Sweep repo docs (`CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `.cursor/rules/`, lint config) and surface relevant skills — establishes the baseline for "consistent with existing patterns" findings.
+4. Analyze the diff plus surrounding code context.
+5. Run PR-suggested tests in read-only mode.
+6. Produce a structured review with Critical / Suggestions / Nits.
 
 ## Flow
 
@@ -20,7 +21,7 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-  A[Read PR + Ticket Context] --> B[Inspect Diff + Nearby Code]
+  A[Read PR + Ticket + Repo Context] --> B[Inspect Diff + Nearby Code]
   B --> C[Run Suggested Tests Read-Only]
   C --> D[Produce Tiered Review]
 ```

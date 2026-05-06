@@ -88,18 +88,38 @@ git -C "$REPO_ROOT" worktree add -b "$BRANCH" "$WT" "origin/$BASE_BRANCH"
 
 Write the state file with `phase: "setup"` so crashes can resume cleanly.
 
-### 3.4 Implement the ticket
+### 3.4 Gather repo context
+
+Before writing any code, build a working picture of the repo's conventions, standards, and the tooling already available to you. This is a read-only sweep — do not edit anything yet.
+
+**Repository documentation** — read what's present, skip what isn't:
+
+- Root-level: `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `README.md`, `STYLEGUIDE.md`, `ARCHITECTURE.md`.
+- `docs/` and `documentation/` trees — focus on entries about contributing, conventions, testing, architecture.
+- AI-assistant rules: `.cursor/rules/`, `.cursorrules`, `.github/copilot-instructions.md`, `.windsurfrules` — treat as authoritative when present.
+- The nearest `CLAUDE.md` / `AGENTS.md` to the files you expect to edit (subdirectory rules can override repo-root rules).
+- Lint/format/test config (`.eslintrc*`, `prettier*`, `pyproject.toml`, `tsconfig.json`, `Makefile`, `package.json` scripts) — surfaces required quality gates, naming conventions, and the commands used for §3.5 local checks.
+
+**Available skills** — identify ones that fit the ticket's domain:
+
+- Re-read the available-skills list already provided in this conversation; flag any whose description matches the ticket scope (e.g. `claude-api` for Anthropic SDK work, `tdd` for test-first changes, `simplify` for cleanup passes, `review` before pushing).
+- Also scan `~/.claude/skills/`, `~/.agents/skills/`, and `<repo>/.claude/skills/` for project-local skills that may not appear in the conversation list.
+- When a skill clearly applies, plan to invoke it via the `Skill` tool during §3.5 rather than reinventing its workflow.
+
+If repo docs and ticket scope conflict, prefer repo docs and raise the conflict on the Linear ticket before coding.
+
+### 3.5 Implement the ticket
 
 Work inside the worktree (`cd "$WT"`). Run autonomously in this phase — no user check-in before opening the PR.
 
-- Read local contributor docs (`CLAUDE.md`, `AGENTS.md`, etc.) and nearby code before starting.
+- Apply the conventions and constraints surfaced in §3.4.
 - Reuse existing patterns before introducing new libraries/APIs.
 - Work in small commits using conventional commit types.
 - Run project quality gates locally before pushing.
 
 If implementation requires a product decision outside ticket scope, stop, leave a WIP commit, notify the user, and exit.
 
-### 3.5 Push and open PR
+### 3.6 Push and open PR
 
 Use your normal PR workflow. Required behavior:
 
@@ -111,7 +131,7 @@ Use your normal PR workflow. Required behavior:
 
 Record `prNumber` in the state file.
 
-### 3.6 Kick off the watch loop
+### 3.7 Kick off the watch loop
 
 Set `phase: "watch"`, `loopStarted: true`, then invoke:
 

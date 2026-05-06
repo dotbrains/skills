@@ -5,9 +5,10 @@ end-to-end, drive it from worktree creation through merge, and tear down
 cleanly.
 
 1. Create an isolated worktree.
-2. Implement and open a PR.
-3. Watch PR health in a loop (AI review comments, CI, merge conflicts).
-4. Tear down the worktree after merge.
+2. Sweep repo docs (`CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `.cursor/rules/`, lint config) and surface relevant skills for the ticket's domain.
+3. Implement and open a PR.
+4. Watch PR health in a loop (AI review comments, CI, merge conflicts).
+5. Tear down the worktree after merge.
 
 ## Lifecycle
 
