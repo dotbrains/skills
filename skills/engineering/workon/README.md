@@ -61,7 +61,7 @@ same invocation continues whatever phase the skill is in.
 
 - `git`
 - `gh` CLI authenticated against your GitHub host
-- Linear access (MCP integration or equivalent API tooling)
+- A connected **Linear MCP server** — the skill always uses MCP tools (e.g. `mcp__*Linear__get_issue`, `mcp__*Linear__save_comment`) for Linear reads and writes. If no Linear MCP is connected, the skill stops at §3.1 rather than falling back to the REST API.
 - Loop scheduler support (for 5-minute watch ticks)
 
 ## Files

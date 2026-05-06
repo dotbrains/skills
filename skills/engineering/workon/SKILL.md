@@ -60,7 +60,7 @@ elif phase == "teardown":
 
 ### 3.1 Load the ticket
 
-Use your configured Linear integration to fetch the issue and its latest comments.
+Fetch the issue and its latest comments through the configured **Linear MCP server** — e.g. `mcp__*Linear__get_issue` and `mcp__*Linear__list_comments` (the exact prefix depends on the user's MCP server name; match the available tool list). Do not fall back to the Linear REST API, the `linear` CLI, or scraped HTML. If no Linear MCP server is connected, stop and tell the user to connect one — do not guess ticket contents.
 
 Synthesize scope using current status fields and recent comments, not only title/summary.
 
@@ -268,3 +268,4 @@ Print a two-line summary: PR URL + "merged and cleaned up."
 - **Avoid internal jargon** in ticket comments; write clear external-facing language.
 - **State file is a cache.** GitHub and filesystem are sources of truth.
 - **Idempotency first.** Setup/watch/teardown must be safe to re-enter.
+- **Linear via MCP, always.** Every Linear read (`get_issue`, `list_comments`) and write (`save_comment`, `save_issue`) goes through the configured Linear MCP server — never the Linear REST API, the `linear` CLI, or HTML scraping. The exact tool prefix varies by MCP server name; match what's surfaced in the available tool list. If the Linear MCP is not connected, surface the gap to the user and stop instead of falling back.

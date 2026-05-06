@@ -76,7 +76,7 @@ The skill returns a fixed-section review:
 
 - `gh` CLI authenticated against your GitHub host
 - Access to the repository being reviewed
-- Ticket system access if the PR links an external issue
+- A connected **Linear MCP server** if the PR links a Linear ticket — the skill always reads Linear via MCP (`mcp__*Linear__get_issue`, `mcp__*Linear__list_comments`), never the REST API. Without it, the review proceeds with PR-only scope and notes reduced certainty.
 
 ## Files
 

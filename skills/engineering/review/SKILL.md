@@ -55,7 +55,12 @@ Try in order:
 
 1. Parse ticket references from PR body/title (e.g. `ENG-123`, `#456`,
    linked URLs).
-2. If a Linear-style ticket id exists, fetch ticket details and latest comments.
+2. If a Linear-style ticket id exists, fetch ticket details and latest comments
+   through the configured **Linear MCP server** (e.g. `mcp__*Linear__get_issue`,
+   `mcp__*Linear__list_comments`; exact prefix depends on the user's MCP server
+   name). Do not fall back to the Linear REST API, the `linear` CLI, or HTML
+   scraping. If no Linear MCP server is connected, treat the ticket as
+   unavailable and proceed with reduced certainty rather than guessing.
 3. If GitHub issue references exist, fetch those issues/comments.
 4. If no associated ticket is discoverable, continue with PR-only scope and note
    reduced certainty.
@@ -276,3 +281,4 @@ Add one short rationale sentence.
 - **High signal only.** Prefer fewer meaningful findings over exhaustive noise.
 - **Context-aware review.** Always evaluate nearby code, not just changed lines.
 - **Scope-first judging.** Review against stated ticket/PR intent, not preferences.
+- **Linear via MCP, always.** All Linear ticket reads go through the configured Linear MCP server (e.g. `mcp__*Linear__get_issue`, `mcp__*Linear__list_comments`) — never the Linear REST API, the `linear` CLI, or HTML scraping. Read-only: do not invoke any Linear `save_*` MCP tool from this skill. If no Linear MCP is connected, treat the ticket as unavailable and note reduced certainty.
