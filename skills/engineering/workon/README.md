@@ -7,8 +7,8 @@ cleanly.
 1. Load the Linear ticket via the Linear MCP — issue body, full comment thread, and relevant attachments (design docs, screenshots, linked PRs, cross-referenced tickets) — before touching the codebase.
 2. Create an isolated worktree.
 3. Sweep repo docs (`CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `.cursor/rules/`, lint config) and surface relevant skills for the ticket's domain.
-4. Implement and open a PR.
-5. Watch PR health in a loop (AI review comments, CI, merge conflicts).
+4. Implement and open a PR — always as a **draft**; the skill never opens a PR ready-for-review or marks an existing draft ready, since that decision belongs to the human owner.
+5. Watch PR health in a loop (AI review comments, CI, merge conflicts) — works the same on draft PRs.
 6. Tear down the worktree after merge.
 
 ## Lifecycle

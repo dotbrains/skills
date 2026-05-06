@@ -139,6 +139,7 @@ Use your normal PR workflow. Required behavior:
 - Respect `.github/pull_request_template.md` when present.
 - Keep description concise.
 - Assign to the current user.
+- **Always open as a draft.** Pass `--draft` to `gh pr create` (or the equivalent flag for whatever PR tool is in use). The skill never opens a PR ready-for-review and never marks an existing draft ready — that decision belongs to the human owner. The watch loop continues to drive Codex comments, CI fixes, and conflict resolution on the draft PR; conversion happens out-of-band.
 
 Record `prNumber` in the state file.
 
