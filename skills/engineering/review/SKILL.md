@@ -139,7 +139,57 @@ Then:
 
 Record pass/fail plus key error snippets for failed commands.
 
-## 6. Produce final review output
+## 6. Algorithmic analysis pass
+
+A separate read-only sweep over the diff for time/space complexity issues. **Informational by default** — algorithmic findings never alone move the verdict to `REQUEST CHANGES`. A `high`-severity finding may be promoted into `Critical` or `Suggestions` only when it meets the standard evidence bar in §4.3 (concrete user/system impact, not theoretical).
+
+Run the diff against the PR base and walk each modified region:
+
+```bash
+gh pr diff "$PR_REF"
+# or, if already on the branch:
+git diff "$BASE_BRANCH"...HEAD
+```
+
+Decision flow per region:
+
+```text
+for each changed region:
+  if not algorithmic in nature → skip (note as non-algorithmic)
+  elif not on a hot path AND not over a large dataset → skip (trivial micro-optimization)
+  else:
+    assess time + space Big-O
+    if optimal for the constraints → mark "Optimal"
+    else → record opportunity + severity (high | medium | low)
+```
+
+"Algorithmic" means search, sort, graph traversal, dynamic programming, or loops with non-trivial complexity. UI markup, configuration, copy changes, and simple field access are skipped explicitly.
+
+For each non-skipped item, capture:
+
+- **File / function:** path + symbol
+- **Time / space complexity:** Big-O notation
+- **Optimality verdict:** `Optimal` or `Can be optimized`
+- **Opportunity:** concrete alternative (e.g. "binary search on already-sorted input")
+- **Severity:** `high` (critical impact), `medium` (meaningful), `low` (minor)
+- **Notes:** caller assumptions, dataset size, hot-path evidence
+
+Severity rubric:
+
+- `high` — algorithm chosen is asymptotically wrong for the realistic input size (e.g. O(n²) in a request-path loop over user-scale data).
+- `medium` — meaningful but bounded gain (e.g. O(n) → O(log n) on inputs that are already sorted upstream).
+- `low` — micro-optimization on a non-hot path; record only if explicitly worth mentioning.
+
+Output rendering rules (used by the §7 `Algorithmic Analysis` section). Pick the heading that matches the worst severity present in the findings:
+
+- any `high` → `Algorithmic Analysis — Optimization Opportunities Found`
+- any `medium` (no `high`) → `Algorithmic Analysis — Minor Opportunities`
+- only `Optimal` items, or only `low` severity → `Algorithmic Analysis — Code Quality Good`
+- no algorithmic code in the diff → `Algorithmic Analysis — No algorithmic code in diff`
+
+Adapted from [`dotbrains/ticketsmith` — `docs/algorithmic-analysis.md`](https://github.com/dotbrains/ticketsmith/blob/main/docs/algorithmic-analysis.md).
+
+## 7. Produce final review output
 
 Return a well-formatted review with the exact section order below.
 
@@ -180,6 +230,19 @@ If none, write `None.`
 Minor polish items only if worthwhile and low-noise.
 
 If none, write `None.`
+
+## Algorithmic Analysis
+
+Heading text follows the §6 severity rubric. Then for each non-skipped item:
+
+- **File:** `<path>` (`<function>`)
+- **Time / Space:** `<O(...)>` / `<O(...)>` — `Optimal` or `Can be optimized` (severity)
+- **Opportunity:** _(omit when `Optimal`)_
+- **Notes:** _(constraints, dataset size, hot-path evidence)_
+
+End with a one-line summary. If no algorithmic code was found in the diff, write only the heading and `No algorithmic code in diff.`
+
+This section is informational — see §6 for promotion rules into `Critical` / `Suggestions`.
 
 ## Test Validation
 

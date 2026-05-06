@@ -8,7 +8,8 @@ default — never edits files, commits, pushes, or posts PR comments.
 3. Sweep repo docs (`CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `.cursor/rules/`, lint config) and surface relevant skills — establishes the baseline for "consistent with existing patterns" findings.
 4. Analyze the diff plus surrounding code context.
 5. Run PR-suggested tests in read-only mode.
-6. Produce a structured review with Critical / Suggestions / Nits.
+6. Run an algorithmic analysis pass over the diff — informational time/space complexity check.
+7. Produce a structured review with Critical / Suggestions / Nits / Algorithmic Analysis.
 
 ## Flow
 
@@ -23,7 +24,8 @@ flowchart LR
 flowchart TD
   A[Read PR + Ticket + Repo Context] --> B[Inspect Diff + Nearby Code]
   B --> C[Run Suggested Tests Read-Only]
-  C --> D[Produce Tiered Review]
+  C --> E[Algorithmic Analysis Pass]
+  E --> D[Produce Tiered Review]
 ```
 
 ## Install
@@ -63,6 +65,7 @@ The skill returns a fixed-section review:
   broken contracts).
 - **Suggestions** — important but non-blocking improvements.
 - **Nits** — minor polish only when worthwhile.
+- **Algorithmic Analysis** — informational time/space complexity sweep over the diff. Heading shifts based on worst severity (`Optimization Opportunities Found` / `Minor Opportunities` / `Code Quality Good` / `No algorithmic code in diff`). Findings are non-blocking unless promoted into Critical or Suggestions per §6 of [`SKILL.md`](./SKILL.md).
 - **Test Validation** — commands claimed vs. commands actually run.
 - **Scope Alignment Check** — what matches scope, what's out of scope, what's
   missing.
@@ -78,3 +81,10 @@ The skill returns a fixed-section review:
 ## Files
 
 - [`SKILL.md`](./SKILL.md) — canonical skill definition consumed by the agent.
+
+## Attribution
+
+The algorithmic analysis pass is adapted from
+[`dotbrains/ticketsmith` — `docs/algorithmic-analysis.md`](https://github.com/dotbrains/ticketsmith/blob/main/docs/algorithmic-analysis.md).
+Both repos are dotbrains-owned under PolyForm Shield 1.0.0, so no third-party
+license entry is required.
