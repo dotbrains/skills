@@ -4,11 +4,12 @@ Portable `/workon` skill for Linear-driven ticket execution: pick up a ticket
 end-to-end, drive it from worktree creation through merge, and tear down
 cleanly.
 
-1. Create an isolated worktree.
-2. Sweep repo docs (`CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `.cursor/rules/`, lint config) and surface relevant skills for the ticket's domain.
-3. Implement and open a PR.
-4. Watch PR health in a loop (AI review comments, CI, merge conflicts).
-5. Tear down the worktree after merge.
+1. Load the Linear ticket via the Linear MCP — issue body, full comment thread, and relevant attachments (design docs, screenshots, linked PRs, cross-referenced tickets) — before touching the codebase.
+2. Create an isolated worktree.
+3. Sweep repo docs (`CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `.cursor/rules/`, lint config) and surface relevant skills for the ticket's domain.
+4. Implement and open a PR.
+5. Watch PR health in a loop (AI review comments, CI, merge conflicts).
+6. Tear down the worktree after merge.
 
 ## Lifecycle
 

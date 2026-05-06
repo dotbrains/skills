@@ -4,7 +4,7 @@ Portable `/review` skill for high-signal pull request review. Read-only by
 default — never edits files, commits, pushes, or posts PR comments.
 
 1. Read PR metadata and description.
-2. Read the associated ticket to understand scope and intent.
+2. Pull full ticket context via the Linear MCP (if Linear-linked) — issue body, full comment thread, and relevant attachments (design docs, screenshots, linked PRs, cross-referenced tickets) — before touching the codebase.
 3. Sweep repo docs (`CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `.cursor/rules/`, lint config) and surface relevant skills — establishes the baseline for "consistent with existing patterns" findings.
 4. Analyze the diff plus surrounding code context.
 5. Run PR-suggested tests in read-only mode.

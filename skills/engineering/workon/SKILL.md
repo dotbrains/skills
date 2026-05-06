@@ -60,11 +60,22 @@ elif phase == "teardown":
 
 ### 3.1 Load the ticket
 
-Fetch the issue and its latest comments through the configured **Linear MCP server** — e.g. `mcp__*Linear__get_issue` and `mcp__*Linear__list_comments` (the exact prefix depends on the user's MCP server name; match the available tool list). Do not fall back to the Linear REST API, the `linear` CLI, or scraped HTML. If no Linear MCP server is connected, stop and tell the user to connect one — do not guess ticket contents.
+Pull full ticket context through the configured **Linear MCP server** before doing anything else. The exact tool prefix depends on the user's MCP server name (e.g. `mcp__claude_ai_Linear__*`); match what's surfaced in the available tool list.
 
-Synthesize scope using current status fields and recent comments, not only title/summary.
+1. **Issue body** — `mcp__*Linear__get_issue`.
+2. **Full comment thread** — `mcp__*Linear__list_comments`. Read every comment, not just the most recent — earlier comments usually hold the product reasoning that the title/summary glosses over.
+3. **Attachments** — enumerate the attachments returned with the issue and pull each one that's relevant to scope:
+   - Linked design docs / specs (Notion, Google Docs, Figma) — open via the appropriate authenticated MCP (e.g. `notion-fetch` for Notion) or `WebFetch` for fully public URLs.
+   - Screenshots and inline images — load via `mcp__*Linear__extract_images` so visual content is actually in context, not just referenced.
+   - Linked GitHub issues / PRs — `gh issue view` / `gh pr view` to surface upstream / sibling work.
+   - Cross-referenced tickets (blockers, parents, duplicates) — recurse with `mcp__*Linear__get_issue` for any that are clearly load-bearing on scope.
+   - Skip obvious irrelevances (user avatars, bot footers, generic CI links) — note them but don't fetch.
 
-If the ticket is ambiguous, under-specified, or blocked on a decision, stop and tell the user. Do not guess, do not create the worktree yet.
+Do not fall back to the Linear REST API, the `linear` CLI, or scraped HTML for any of the above. If no Linear MCP server is connected, stop and tell the user to connect one — do not guess ticket contents.
+
+Synthesize scope using current status fields, the full comment history, and the pulled attachments — not only title/summary.
+
+If the ticket is ambiguous, under-specified, or blocked on a decision after this full sweep, stop and tell the user. Do not guess, do not create the worktree yet.
 
 ### 3.2 Determine repo metadata
 

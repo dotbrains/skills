@@ -55,12 +55,30 @@ Try in order:
 
 1. Parse ticket references from PR body/title (e.g. `ENG-123`, `#456`,
    linked URLs).
-2. If a Linear-style ticket id exists, fetch ticket details and latest comments
-   through the configured **Linear MCP server** (e.g. `mcp__*Linear__get_issue`,
-   `mcp__*Linear__list_comments`; exact prefix depends on the user's MCP server
-   name). Do not fall back to the Linear REST API, the `linear` CLI, or HTML
-   scraping. If no Linear MCP server is connected, treat the ticket as
-   unavailable and proceed with reduced certainty rather than guessing.
+2. If a Linear-style ticket id exists, pull **full ticket context** through the
+   configured **Linear MCP server** before moving on to the codebase. The exact
+   tool prefix depends on the user's MCP server name (e.g.
+   `mcp__claude_ai_Linear__*`); match what's surfaced in the available tool
+   list. Sweep all of:
+   - **Issue body** — `mcp__*Linear__get_issue`.
+   - **Full comment thread** — `mcp__*Linear__list_comments`. Read every
+     comment, not only the most recent — earlier comments often define the
+     product intent the PR is judged against.
+   - **Attachments** — enumerate the attachments returned with the issue and
+     pull each one that's load-bearing on scope:
+     - Linked design docs / specs (Notion, Google Docs, Figma) via the
+       appropriate authenticated MCP (e.g. `notion-fetch`) or `WebFetch` for
+       fully public URLs.
+     - Screenshots and inline images via `mcp__*Linear__extract_images` so
+       visual content is actually in context.
+     - Linked GitHub issues / PRs via `gh issue view` / `gh pr view`.
+     - Cross-referenced tickets (blockers, parents) via recursive
+       `mcp__*Linear__get_issue` when clearly load-bearing.
+     - Skip obvious irrelevances (avatars, bot footers, generic CI links).
+
+   Do not fall back to the Linear REST API, the `linear` CLI, or HTML scraping.
+   If no Linear MCP server is connected, treat the ticket as unavailable and
+   proceed with reduced certainty rather than guessing.
 3. If GitHub issue references exist, fetch those issues/comments.
 4. If no associated ticket is discoverable, continue with PR-only scope and note
    reduced certainty.
