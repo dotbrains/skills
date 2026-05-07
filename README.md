@@ -3,6 +3,8 @@
 [![CI](https://github.com/dotbrains/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/dotbrains/skills/actions/workflows/ci.yml)
 [![License: PolyForm Shield](https://img.shields.io/badge/License-PolyForm%20Shield-brightgreen.svg)](https://polyformproject.org/licenses/shield/1.0.0)
 
+[![skills.sh](https://skills.sh/b/dotbrains/skills)](https://skills.sh/dotbrains/skills)
+
 Portable agent skills from [dotbrains](https://github.com/dotbrains).
 
 ## Quickstart
