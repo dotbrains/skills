@@ -18,16 +18,23 @@ Pick the skills you want, choose the agents to install them on, and you're done.
 ### Engineering
 
 Skills for code work — bug-hunting, design, planning, review, and execution.
-
+- **[branch-conventions](./skills/engineering/branch-conventions/README.md)** — Standard branch naming and creation flow using conventional prefixes and an up-to-date default branch.
+- **[ci-monitoring](./skills/engineering/ci-monitoring/README.md)** — Monitor GitHub PR checks, rerun failed jobs when appropriate, and confirm merge-readiness.
+- **[commit-conventions](./skills/engineering/commit-conventions/README.md)** — Keep commit messages aligned with branch intent using conventional commit types.
 - **[diagnose](./skills/engineering/diagnose/README.md)** — Disciplined diagnosis loop for hard bugs and performance regressions: reproduce → minimise → hypothesise → instrument → fix → regression-test.
+- **[git-commit](./skills/engineering/git-commit/README.md)** — Safe commit-message workflow using temp files and `git commit -F` to avoid shell-substitution pitfalls.
+- **[git-safety](./skills/engineering/git-safety/README.md)** — Guardrails for safe git operations: stash/cherry-pick preference, force-push constraints, and destructive-command avoidance.
 - **[grill-with-docs](./skills/engineering/grill-with-docs/README.md)** — Code-aware grilling session that challenges your plan against the existing domain model and updates `CONTEXT.md` / ADRs inline.
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/README.md)** — Surface architectural friction and propose deepening opportunities — refactors that turn shallow modules into deep ones.
+- **[pr-monitor](./skills/engineering/pr-monitor/README.md)** — One-pass PR monitor that processes bot review feedback, CI failures, and merge-readiness signals.
+- **[pr-workflow](./skills/engineering/pr-workflow/README.md)** — Create and update PRs with clear reviewer-focused descriptions and mergeability checks.
 - **[review](./skills/engineering/review/README.md)** — Read-only, high-signal pull request review using PR description, ticket scope, full diff context, and PR-suggested tests. Returns Critical / Suggestions / Nits.
 - **[tdd](./skills/engineering/tdd/README.md)** — Test-driven development with a red-green-refactor loop. Vertical slices via tracer bullets — one test, one implementation, repeat.
 - **[to-issues](./skills/engineering/to-issues/README.md)** — Break a plan, spec, or PRD into independently-grabbable issues using tracer-bullet vertical slices.
 - **[to-prd](./skills/engineering/to-prd/README.md)** — Turn the current conversation context into a PRD and publish it to the project issue tracker.
 - **[triage](./skills/engineering/triage/README.md)** — Move issues through a small state machine of triage roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`).
 - **[workon](./skills/engineering/workon/README.md)** — Pick up a Linear ticket end-to-end: worktree, implement, PR, then watch the PR on a 5-minute loop addressing review comments, CI failures, and merge conflicts until merged.
+- **[workon-event](./skills/engineering/workon-event/README.md)** — Event-driven `/workon` companion that handles one ticket event per invocation via a dispatcher.
 - **[zoom-out](./skills/engineering/zoom-out/README.md)** — Tell the agent to zoom out and give a higher-level perspective on an unfamiliar section of code.
 
 ### Productivity
@@ -149,10 +156,15 @@ Or, from a clone of this repo, symlink every skill into `~/.claude/skills/`:
 ```text
 skills/
   engineering/
+    branch-conventions/ SKILL.md  README.md
+    ci-monitoring/      SKILL.md  README.md
+    commit-conventions/ SKILL.md  README.md
     diagnose/
       SKILL.md
       README.md
       scripts/hitl-loop.template.sh
+    git-commit/         SKILL.md  README.md
+    git-safety/         SKILL.md  README.md
     grill-with-docs/
       SKILL.md  README.md
       CONTEXT-FORMAT.md  ADR-FORMAT.md
@@ -160,6 +172,8 @@ skills/
       SKILL.md
       README.md
       DEEPENING.md  INTERFACE-DESIGN.md  LANGUAGE.md
+    pr-monitor/     SKILL.md  README.md
+    pr-workflow/    SKILL.md  README.md
     review/        SKILL.md  README.md
     tdd/           SKILL.md  README.md
                    tests.md  mocking.md  deep-modules.md
@@ -169,6 +183,7 @@ skills/
     triage/        SKILL.md  README.md
                    AGENT-BRIEF.md  OUT-OF-SCOPE.md
     workon/        SKILL.md  README.md
+    workon-event/  SKILL.md  README.md
     zoom-out/      SKILL.md  README.md
   productivity/
     caveman/       SKILL.md  README.md
