@@ -15,6 +15,36 @@ npx skills@latest add dotbrains/skills
 
 Pick the skills you want, choose the agents to install them on, and you're done.
 
+## Install (release script)
+
+For the same release-delivered installer pattern used in `this repository`,
+download and run `install.sh` / `install.ps1` from a GitHub Release.
+
+Prerequisites:
+
+- Node.js 18+
+- GitHub CLI (`gh`)
+
+macOS / Linux:
+
+```bash
+tmp="$(mktemp)"; gh release download --repo dotbrains/skills --pattern 'install.sh' --output "$tmp" --clobber; bash "$tmp"; rm "$tmp"
+```
+
+Windows PowerShell:
+
+```powershell
+$p = Join-Path $env:TEMP 'install.ps1'; gh release download --repo dotbrains/skills --pattern 'install.ps1' --output $p --clobber; & $p; Remove-Item $p
+```
+
+The installer validates Node.js and then runs:
+
+```bash
+npx --yes skills@latest add dotbrains/skills
+```
+
+Any additional arguments passed to the installer are forwarded to `skills add`.
+
 ## Available skills
 
 ### Engineering
