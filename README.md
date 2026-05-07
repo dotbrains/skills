@@ -17,8 +17,8 @@ Pick the skills you want, choose the agents to install them on, and you're done.
 
 ## Install (release script)
 
-For the same release-delivered installer pattern used in `this repository`,
-download and run `install.sh` / `install.ps1` from a GitHub Release.
+Use the release-delivered installer pattern by downloading and running
+`install.sh` / `install.ps1` from a GitHub Release.
 
 Prerequisites:
 
