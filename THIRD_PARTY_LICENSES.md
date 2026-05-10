@@ -17,6 +17,7 @@ The following skills were ported from `mattpocock/skills` and remain MIT-license
 - `skills/engineering/diagnose/` (including `scripts/hitl-loop.template.sh`)
 - `skills/engineering/grill-with-docs/` (including `CONTEXT-FORMAT.md`, `ADR-FORMAT.md`)
 - `skills/engineering/improve-codebase-architecture/` (including `DEEPENING.md`, `INTERFACE-DESIGN.md`, `LANGUAGE.md`)
+- `skills/engineering/prototype/` (including `LOGIC.md`, `UI.md`)
 - `skills/engineering/tdd/` (including `tests.md`, `mocking.md`, `deep-modules.md`, `interface-design.md`, `refactoring.md`)
 - `skills/engineering/to-issues/`
 - `skills/engineering/to-prd/`
