@@ -76,6 +76,7 @@ General workflow skills, not code-specific.
 
 - **[caveman](./skills/productivity/caveman/README.md)** — Ultra-compressed communication mode. Cuts token usage ~75% by dropping filler while keeping full technical accuracy.
 - **[grill-me](./skills/productivity/grill-me/README.md)** — Get interviewed relentlessly about a plan or design until every branch of the decision tree resolves.
+- **[handoff](./skills/productivity/handoff/README.md)** — Compact the current conversation into a handoff document so another agent can pick up the work.
 - **[write-a-skill](./skills/productivity/write-a-skill/README.md)** — Create new agent skills with proper structure, progressive disclosure, and bundled resources.
 
 Each skill directory contains its own `README.md` (with usage and any
@@ -224,6 +225,7 @@ skills/
   productivity/
     caveman/       SKILL.md  README.md
     grill-me/      SKILL.md  README.md
+    handoff/       SKILL.md  README.md
     write-a-skill/ SKILL.md  README.md
 scripts/
   link-skills.sh   # symlink every SKILL.md into ~/.claude/skills/

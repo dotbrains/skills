@@ -25,6 +25,7 @@ The following skills were ported from `mattpocock/skills` and remain MIT-license
 - `skills/engineering/zoom-out/`
 - `skills/productivity/caveman/`
 - `skills/productivity/grill-me/`
+- `skills/productivity/handoff/`
 - `skills/productivity/write-a-skill/`
 
 A few upstream skills (`triage`, `to-issues`, `to-prd`) reference an
